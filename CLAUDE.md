@@ -64,14 +64,15 @@
 ## 現状(2026-07-18更新)
 
 - RHTML: トークナイザ+DOM木構築器、13テストgreen。
-- RCSS: セレクタ/パーサー/カスケード計算+子孫結合子(スペース区切り
-  セレクタ)対応、20テストgreen。
+- RCSS: セレクタ/パーサー/カスケード計算+子孫結合子・子結合子(`>`)・
+  隣接兄弟結合子(`+`)対応、27テストgreen。
 - RJSON: 旧Rust-JSONの内容をそのまま移行(パス依存先の
   `audiocafe-tokyo-server`・`aruaru-db`も更新済み)。
 - RReact: 仮想DOM+差分計算(reconciliation)、10テストgreen。加えて
   `dom_bridge`フィーチャ(既定では無効)でRHTML/RCSSと接続する
   最小のEnd-to-Endパイプライン(RHTMLでDOM木構築→RCSSでスタイル解決→
-  RReactのVNode木変換)を実装、フィーチャ有効時は14テストgreen。
+  RReactのVNode木変換)を実装、フィーチャ有効時は16テストgreen
+  (RCSSの子/隣接兄弟結合子対応に追従、兄弟ノード追跡を追加)。
 - RTypeScript: 最小スコープ(単純な型注釈の削除・JSへの
   トランスパイルのみ)で新規実装、14テストgreen。GitHubリポジトリ
   `aon-co-jp/RTypeScript`へpush済み。
@@ -101,8 +102,8 @@
 3. RPoem上での最小SSRエンドポイント(RHTML+RCSSだけで完全なHTMLを
    返す、というマイルストーン)
 4. RBootStrapのflexbox折り返し計算・レスポンシブ`@media`出力
-5. RCSSの子結合子(`>`)・隣接兄弟結合子(`+`)対応(子孫結合子は
-   対応済み)
+5. RCSSの一般兄弟結合子(`~`)対応・`@media`/`!important`(子結合子・
+   隣接兄弟結合子は2026-07-18対応済み)
 6. RGraphQLのvalidation/execution層(v0.1.0/v0.2.0はパーサーのみ)
 7. RNode.jsのコアモジュール(fs以外の http/path等)実I/O実装
 
