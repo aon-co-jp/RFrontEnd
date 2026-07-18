@@ -90,7 +90,26 @@
 5. RCSSの子結合子(`>`)・隣接兄弟結合子(`+`)対応(子孫結合子は
    対応済み)
 
+## 契約不要の独自AI・「分身の術」構成について(2026-07-18追記、正本はopen-raid-z参照)
+
+`open-raid-z/CLAUDE.md`に、(1) 外部AI事業者との有償契約を必要としない
+`open-cuda` + `aruaru-llm` のSET構成、(2) `open-web-server`の「分身の術」
+(共有バックエンドインスタンスへの動的テナント登録、ドメインごとの
+個別インストール不要)の対象拡大、という2つのエコシステム方針が
+記録されている。
+
+**このリポジトリ(RHTML/RCSS/RTypeScript/RJSON/RReact)への適用について
+の判断**: これらはいずれも**ライブラリ/コンパイル時コンポーネント**
+であり、単体でHTTPサービスとして稼働するものではないため、「分身の術」
+(動的テナント登録)は直接は適用されない。ただし「次にすべきこと」#3の
+**「RPoem上での最小SSRエンドポイント」が実装された段階では、そのSSR
+エンドポイント自体は`open-web-server`と同じ「分身の術」パターン
+(共有RPoemインスタンスへドメインを動的登録、個別インストール不要)に
+従うべき**——RPoem側のCLAUDE.mdに記載済みの方針を、RFrontEnd由来の
+SSR機能を提供する際にも踏襲すること。
+
 ## 関連プロジェクト
 
 - [open-raid-z](https://github.com/aon-co-jp/open-raid-z) — 開発ルールの正本
-- [RPoem](https://github.com/aon-co-jp/RPoem) / [RCosmo](https://github.com/aon-co-jp/RCosmo) — サーバー側実行基盤(このリポジトリの傘下ではないが両輪をなす)
+- [RPoem](https://github.com/aon-co-jp/RPoem) / [RCosmo](https://github.com/aon-co-jp/RCosmo) — サーバー側実行基盤(このリポジトリの傘下ではないが両輪をなす)。「分身の術」構成の対象
+- [aruaru-llm](https://github.com/aon-co-jp/aruaru-llm) / [open-cuda](https://github.com/aon-co-jp/open-cuda) — 契約不要の独自AI SET構成
