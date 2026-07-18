@@ -55,27 +55,40 @@
   する設計は、CSS・将来のRTypeScript構文解析にも応用可能な汎用パターン。
 - **`Patch`ベースの差分適用**(RReact): 仮想DOMの差分計算結果を
   `RHTML::Node`への実適用に変換するアダプタは、将来RReact↔RHTMLを
-  接続する際にそのまま流用できる設計にしてある(現状はまだ未接続)。
+  接続する際にそのまま流用できる設計にしてある。RHTML↔RCSS↔RReactの
+  「DOM木構築→スタイル解決→VNode化」までは2026-07-18に接続済み
+  (`RReact`の`dom_bridge`フィーチャ)、`Patch`の実DOM反映は未接続。
 
-## 現状(2026-07-18)
+## 現状(2026-07-18更新)
 
 - RHTML: トークナイザ+DOM木構築器、13テストgreen。
-- RCSS: セレクタ/パーサー/カスケード計算、13テストgreen。
+- RCSS: セレクタ/パーサー/カスケード計算+子孫結合子(スペース区切り
+  セレクタ)対応、20テストgreen。
 - RJSON: 旧Rust-JSONの内容をそのまま移行(パス依存先の
   `audiocafe-tokyo-server`・`aruaru-db`も更新済み)。
-- RReact: 仮想DOM+差分計算(reconciliation)、10テストgreen。
-- RTypeScript: 未着手(空リポジトリ)。
+- RReact: 仮想DOM+差分計算(reconciliation)、10テストgreen。加えて
+  `dom_bridge`フィーチャ(既定では無効)でRHTML/RCSSと接続する
+  最小のEnd-to-Endパイプライン(RHTMLでDOM木構築→RCSSでスタイル解決→
+  RReactのVNode木変換)を実装、フィーチャ有効時は14テストgreen。
+- RTypeScript: 最小スコープ(単純な型注釈の削除・JSへの
+  トランスパイルのみ)で新規実装、14テストgreen。GitHubリポジトリ
+  `aon-co-jp/RTypeScript`へpush済み。
 - RBootStrap: 未着手(GitHubリポジトリ未作成)。
 
 ## 次にすべきこと
 
-1. RTypeScriptの設計方針決定(3案: A=独自VM実行、B=Rustネイティブ
+1. RTypeScriptの本格実装方針決定(3案: A=独自VM実行、B=Rustネイティブ
    DSL+Wasm直接コンパイル、C=swcでASTのみ取り込み+独自インタプリタ。
-   B案から着手しC案へ拡張するのが現実的という暫定方針)
-2. RHTML↔RCSS↔RReactの相互接続(現状は3つとも独立、統合は未着手)
+   B案から着手しC案へ拡張するのが現実的という暫定方針)。第一段の
+   型注釈除去トランスパイラは実装済み。
+2. RHTML↔RCSS↔RReactの相互接続の深化(最小パイプラインは実装済み
+   ——`RReact`の`dom_bridge`フィーチャ参照。次は`Patch`の実DOM反映
+   ・コンポーネントモデル)
 3. RPoem上での最小SSRエンドポイント(RHTML+RCSSだけで完全なHTMLを
    返す、というマイルストーン)
 4. RBootStrapリポジトリの新設
+5. RCSSの子結合子(`>`)・隣接兄弟結合子(`+`)対応(子孫結合子は
+   対応済み)
 
 ## 関連プロジェクト
 
