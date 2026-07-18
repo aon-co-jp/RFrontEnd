@@ -56,10 +56,11 @@
 - **`TokenSink`パターン**(RHTML): トークナイザとDOM構築器を疎結合に
   する設計は、CSS・将来のRTypeScript構文解析にも応用可能な汎用パターン。
 - **`Patch`ベースの差分適用**(RReact): 仮想DOMの差分計算結果を
-  `RHTML::Node`への実適用に変換するアダプタは、将来RReact↔RHTMLを
-  接続する際にそのまま流用できる設計にしてある。RHTML↔RCSS↔RReactの
-  「DOM木構築→スタイル解決→VNode化」までは2026-07-18に接続済み
-  (`RReact`の`dom_bridge`フィーチャ)、`Patch`の実DOM反映は未接続。
+  `RHTML::Node`への実適用に変換するアダプタ。RHTML↔RCSS↔RReactの
+  「DOM木構築→スタイル解決→VNode化」(2026-07-18)に加え、`Patch`の
+  実DOM(`rhtml5::Node`)への反映(`dom_bridge::apply_patch`、
+  2026-07-19)まで接続済み。コンポーネントモデル(hooks相当)は
+  引き続き未着手。
 
 ## 現状(2026-07-18更新)
 
@@ -73,9 +74,12 @@
   `audiocafe-tokyo-server`・`aruaru-db`も更新済み)。
 - RReact: 仮想DOM+差分計算(reconciliation)、10テストgreen。加えて
   `dom_bridge`フィーチャ(既定では無効)でRHTML/RCSSと接続する
-  最小のEnd-to-Endパイプライン(RHTMLでDOM木構築→RCSSでスタイル解決→
-  RReactのVNode木変換)を実装、フィーチャ有効時は16テストgreen
-  (RCSSの子/隣接兄弟結合子対応に追従、兄弟ノード追跡を追加)。
+  End-to-Endパイプライン(RHTMLでDOM木構築→RCSSでスタイル解決→
+  RReactのVNode木変換→`Patch`の`rhtml5::Node`への実適用まで)を実装、
+  フィーチャ有効時は22テストgreen(2026-07-19、`apply_patch`で
+  挿入/削除/置換/属性更新/テキスト更新/keyed子要素の並べ替えに対応、
+  「実DOM」はweb-sysのブラウザDOMではなくRHTMLの`Node`木)。
+  コンポーネントモデル(hooks相当)は引き続き未着手。
 - RTypeScript: 最小スコープ(単純な型注釈の削除・JSへの
   トランスパイルのみ)で新規実装、14テストgreen。GitHubリポジトリ
   `aon-co-jp/RTypeScript`へpush済み。
