@@ -87,11 +87,20 @@
   ディレクティブ)まで拡張、24テストgreen。依存クレートは引き続き
   ゼロ。`aon-co-jp/RGraphQL`へpush済み。
 - RNode.js: CommonJS解決(実I/O版含む)・イベントループ・
-  `TokioDriver`(実時間駆動)、36テストgreen。**実バグ発見・修正
-  (2026-07-18)**: `TokioDriver::wait_until`が`Handle::block_on`経由で
+  `TokioDriver`(実時間駆動)・`fs`コアモジュール相当(2026-07-19追加、
+  下記参照)、既定42テスト・全feature有効時46テストgreen。**実バグ発見・
+  修正(2026-07-18)**: `TokioDriver::wait_until`が`Handle::block_on`経由で
   永久にハングする不具合があり、`std::thread::sleep`ベースの実装に
   修正(合わせてtokio依存自体を撤去、ゼロ依存を維持)。
-  `aon-co-jp/RNode.js`へpush済み。
+  **2026-07-19追記**: 以前ここに「`fs`は実装済み」という前提の記載が
+  あったが誤りだった(実際には`resolve.rs`のモジュール解決用
+  `StdFileSystem`が存在判定のみを行っていただけで、汎用の`fs`読み書き
+  APIは存在しなかった)。読み直しで確認の上、`fs`モジュール
+  (`read_file`/`read_to_string`/`write_file`/`exists`/`mkdir`
+  (`_recursive`)/`read_dir`/`stat`/`remove_file`/`remove_dir`
+  (`_all`)、すべて`std::fs`による実I/O、一時ディレクトリでの
+  読み書き往復テストで検証済み)を新規実装し、依存クレートゼロを
+  維持したまま`aon-co-jp/RNode.js`へpush済み。
 
 ## 運用ルール追記(2026-07-18、正本はopen-raid-zのCLAUDE.md参照) — 確認不要の自動継続・リミット解除後の自動再開
 
@@ -134,7 +143,10 @@
 5. RCSSの`@media`/`!important`対応(子結合子・隣接兄弟結合子・
    一般兄弟結合子(`~`)は2026-07-19までに対応済み)
 6. RGraphQLのvalidation/execution層(v0.1.0/v0.2.0はパーサーのみ)
-7. RNode.jsのコアモジュール(fs以外の http/path等)実I/O実装
+7. RNode.jsのコアモジュール追加実I/O実装(`fs`は2026-07-19に実装済み
+   ——上記「現状」参照。残るは`http`(最小クライアント、実ソケット
+   I/O)・`path`(`resolve.rs`内にアドホックに存在する`join`/`normalize`
+   を汎用モジュールとして切り出し)等)
 
 ## 契約不要の独自AI・「分身の術」構成について(2026-07-18追記、正本はopen-raid-z参照)
 
