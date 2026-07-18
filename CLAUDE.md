@@ -17,9 +17,12 @@
 |---|---|---|---|---|
 | RHTML | HTML5相当のブラウザエンジン級パーサー/DOM実装 | [RTHML](https://github.com/aon-co-jp/RTHML) | `F:\open-runo\RFrontEnd\RHTML` | `/root/RFrontEnd/RHTML` |
 | RCSS | CSS3相当のパーサー/カスケード/スタイル計算 | [RCSS](https://github.com/aon-co-jp/RCSS) | `F:\open-runo\RFrontEnd\RCSS` | `/root/RFrontEnd/RCSS` |
+| RBootStrap | Bootstrap相当のCSSフレームワーク(グリッド+基本コンポーネント) | [RBootStrap](https://github.com/aon-co-jp/RBootStrap) | `F:\open-runo\RFrontEnd\RBootStrap` | `/root/RFrontEnd/RBootStrap` |
 | RTypeScript | TypeScript相当(クライアント側ロジック、Wasm化) | [RTypeScript](https://github.com/aon-co-jp/RTypeScript) | `F:\open-runo\RFrontEnd\RTypeScript` | `/root/RFrontEnd/RTypeScript` |
 | RJSON | JSON処理(旧`Rust-JSON`を改称・移動) | [RJSON](https://github.com/aon-co-jp/RJSON) | `F:\open-runo\RFrontEnd\RJSON` | `/root/RFrontEnd/RJSON` |
 | RReact | React(React DOM/Native/Mobile相当)のコンポーネントモデル | [RReact](https://github.com/aon-co-jp/RReact) | `F:\open-runo\RFrontEnd\RReact` | `/root/RFrontEnd/RReact` |
+| RGraphQL | GraphQL仕様の自前実装(トークナイザ/パーサー、v0.2.0でmutation/変数/フラグメント対応) | [RGraphQL](https://github.com/aon-co-jp/RGraphQL) | `F:\open-runo\RFrontEnd\RGraphQL` | `/root/RFrontEnd/RGraphQL` |
+| RNode.js | Node.jsコア概念の自前実装(CommonJS解決・イベントループ・実行時ドライバ) | [RNode.js](https://github.com/aon-co-jp/RNode.js) | `F:\open-runo\RFrontEnd\RNode.js` | `/root/RFrontEnd/RNode.js` |
 
 **傘下ではないが関連するプロジェクト**(このリポジトリの外、`RFrontEnd`
 ディレクトリの外に配置):
@@ -28,7 +31,6 @@
   `F:\open-runo\RPoem`、VPS `/root/RPoem`
 - [RCosmo](https://github.com/aon-co-jp/RCosmo)(旧`open-runo`) —
   `F:\open-runo\RCosmo`、VPS `/root/RCosmo`
-- RBootStrap(Bootstrap相当のCSSフレームワーク) — 次段階で新設予定
 
 ## アーキテクチャ方針
 
@@ -73,7 +75,19 @@
 - RTypeScript: 最小スコープ(単純な型注釈の削除・JSへの
   トランスパイルのみ)で新規実装、14テストgreen。GitHubリポジトリ
   `aon-co-jp/RTypeScript`へpush済み。
-- RBootStrap: 未着手(GitHubリポジトリ未作成)。
+- RBootStrap: グリッドシステム(container/row/col-*)+基本コンポーネント
+  (button/card/navbar)のクラス名パーサー、22テストgreen。
+  `aon-co-jp/RBootStrap`へpush済み(2026-07-18、独立リポジトリとして
+  未初期化・未pushのまま放置されていたのを巡回中に発見・修正)。
+- RGraphQL: v0.2.0スコープ(mutation・変数定義・フラグメント・
+  ディレクティブ)まで拡張、24テストgreen。依存クレートは引き続き
+  ゼロ。`aon-co-jp/RGraphQL`へpush済み。
+- RNode.js: CommonJS解決(実I/O版含む)・イベントループ・
+  `TokioDriver`(実時間駆動)、36テストgreen。**実バグ発見・修正
+  (2026-07-18)**: `TokioDriver::wait_until`が`Handle::block_on`経由で
+  永久にハングする不具合があり、`std::thread::sleep`ベースの実装に
+  修正(合わせてtokio依存自体を撤去、ゼロ依存を維持)。
+  `aon-co-jp/RNode.js`へpush済み。
 
 ## 次にすべきこと
 
@@ -86,9 +100,11 @@
    ・コンポーネントモデル)
 3. RPoem上での最小SSRエンドポイント(RHTML+RCSSだけで完全なHTMLを
    返す、というマイルストーン)
-4. RBootStrapリポジトリの新設
+4. RBootStrapのflexbox折り返し計算・レスポンシブ`@media`出力
 5. RCSSの子結合子(`>`)・隣接兄弟結合子(`+`)対応(子孫結合子は
    対応済み)
+6. RGraphQLのvalidation/execution層(v0.1.0/v0.2.0はパーサーのみ)
+7. RNode.jsのコアモジュール(fs以外の http/path等)実I/O実装
 
 ## 契約不要の独自AI・「分身の術」構成について(2026-07-18追記、正本はopen-raid-z参照)
 
