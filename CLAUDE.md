@@ -17,7 +17,7 @@
 |---|---|---|---|---|
 | RHTML | HTML5相当のブラウザエンジン級パーサー/DOM実装 | [RTHML](https://github.com/aon-co-jp/RTHML) | `F:\open-runo\RFrontEnd\RHTML` | `/root/RFrontEnd/RHTML` |
 | RCSS | CSS3相当のパーサー/カスケード/スタイル計算 | [RCSS](https://github.com/aon-co-jp/RCSS) | `F:\open-runo\RFrontEnd\RCSS` | `/root/RFrontEnd/RCSS` |
-| RBootStrap | Bootstrap相当のCSSフレームワーク(グリッド+基本コンポーネント) | [RBootStrap](https://github.com/aon-co-jp/RBootStrap) | `F:\open-runo\RFrontEnd\RBootStrap` | `/root/RFrontEnd/RBootStrap` |
+| RBootstrap | Bootstrap相当のCSSフレームワーク(グリッド+基本コンポーネント) | [RBootstrap](https://github.com/aon-co-jp/RBootstrap) | `F:\open-runo\RFrontEnd\RBootstrap` | `/root/RFrontEnd/RBootstrap` |
 | RTypeScript | TypeScript相当(クライアント側ロジック、Wasm化) | [RTypeScript](https://github.com/aon-co-jp/RTypeScript) | `F:\open-runo\RFrontEnd\RTypeScript` | `/root/RFrontEnd/RTypeScript` |
 | RJSON | JSON処理(旧`Rust-JSON`を改称・移動) | [RJSON](https://github.com/aon-co-jp/RJSON) | `F:\open-runo\RFrontEnd\RJSON` | `/root/RFrontEnd/RJSON` |
 | RReact | React(React DOM/Native/Mobile相当)のコンポーネントモデル | [RReact](https://github.com/aon-co-jp/RReact) | `F:\open-runo\RFrontEnd\RReact` | `/root/RFrontEnd/RReact` |
@@ -185,7 +185,11 @@ SSR機能を提供する際にも踏襲すること。
   RHTML/RGraphQL/RNode.js/RBootStrap等の傘下リポジトリ)のセッションが
   開始した際は、上記「次にすべきこと」1〜7を確認不要でそのまま
   着手すること(既存の運用ルール通り)。
-  - 傘下リポジトリの中で最も進捗が浅いのは**RBootStrap**
+  - 傘下リポジトリの中で最も進捗が浅いのは**RBootstrap**
+    (2026-07-20、GitHubリポジトリ名を`RBootStrap`→`RBootstrap`に
+    ユーザー指示でリネーム済み——ローカル`F:\open-runo\RFrontEnd\
+    RBootstrap`・VPS`/root/RFrontEnd/RBootstrap`・GitHub remoteとも
+    更新済み、旧名での言及は過去のHANDOFF本文にのみ残る)
     (コミット2件のみ、グリッド+基本コンポーネントのクラス名パーサー
     段階、flexbox折り返し計算・レスポンシブ`@media`出力が未着手)。
     優先度をつけるなら、まずここから着手するのが妥当。
