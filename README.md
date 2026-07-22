@@ -2,6 +2,12 @@
 
 HTML5/CSS3/TypeScript/React相当を、既存実装のコードを一切流用せず一から開発する複数プロジェクトを束ねる親リポジトリ。
 
+📖 詳細: [日本語 README](README-Japan.md) / [English README](README-English.md) /
+[中文](README-Chinese.md) / [한국어](README-Korea.md) / [Español](README-Spain.md) /
+[Français](README-France.md) / [Deutsch](README-Germany.md) / [Italiano](README-Italy.md) /
+[Русский](README-Russia.md) / [العربية](README-Arabic.md) —
+他プロジェクトへの導入は **[PORTING.md](PORTING.md)** 1 枚で完結します。
+
 ## 傘下プロジェクト
 
 | プロジェクト | 役割 | リポジトリ |
