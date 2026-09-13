@@ -30,7 +30,7 @@ repo rename・crate改称、`RS-JavaScript`(JavaScript自体のトークナイ�
 | RS-TypeScript | TypeScript相当(型注釈削除トランスパイラ、クライアント側ロジック。旧`RTypeScript`) | [RS-TypeScript](https://github.com/aon-co-jp/RS-TypeScript) | `F:\runo\repository\RFrontEnd\RS-TypeScript` | `/root/RFrontEnd/RS-TypeScript`(旧パスのまま要更新) |
 | RS-JavaScript | JavaScript(ECMAScript仕様)自体のトークナイザ/パーサー/実行エンジン(2026-09-13新設、ひな形のみ) | [RS-JavaScript](https://github.com/aon-co-jp/RS-JavaScript) | `F:\runo\repository\RFrontEnd\RS-JavaScript` | 未配置 |
 | RJSON | JSON処理(旧`Rust-JSON`。**2026-09-13、`RFrontEnd`傘下の重複clone扱いをやめ`RS-JSON`へ統合**——実体は`F:\runo`直下のRS-JSON参照) | [RS-JSON](https://github.com/aon-co-jp/RS-JSON) | `F:\runo\repository\RS-JSON`(`RFrontEnd`傘下ではない) | `/root/RS-JSON` |
-| RReact | React(React DOM/Native/Mobile相当)のコンポーネントモデル。2026-09-13、関数コンポーネント+`use_state`フック実装 | [RReact](https://github.com/aon-co-jp/RReact) | `F:\runo\repository\RFrontEnd\RReact` | `/root/RFrontEnd/RReact` |
+| RS-React | React(React DOM/Native/Mobile相当)のコンポーネントモデル。2026-09-13、関数コンポーネント+`use_state`フック実装、続けて同日`RReact`から改称(crate名も`rs-react`へ) | [RS-React](https://github.com/aon-co-jp/RS-React) | `F:\runo\repository\RFrontEnd\RS-React` | `/root/RFrontEnd/RReact`(旧パスのまま要更新) |
 | RGraphQL | GraphQL仕様の自前実装(トークナイザ/パーサー、v0.2.0でmutation/変数/フラグメント対応) | [RGraphQL](https://github.com/aon-co-jp/RGraphQL) | `F:\runo\repository\RFrontEnd\RGraphQL` | `/root/RFrontEnd/RGraphQL` |
 | RNode.js | Node.jsコア概念の自前実装(CommonJS解決・イベントループ・実行時ドライバ) | [RNode.js](https://github.com/aon-co-jp/RNode.js) | `F:\runo\repository\RFrontEnd\RNode.js` | `/root/RFrontEnd/RNode.js` |
 
@@ -210,9 +210,10 @@ SSR機能を提供する際にも踏襲すること。
 - [RPoem](https://github.com/aon-co-jp/RPoem) / [RCosmo](https://github.com/aon-co-jp/RCosmo) — サーバー側実行基盤(このリポジトリの傘下ではないが両輪をなす)。「分身の術」構成の対象
 - [aruaru-llm](https://github.com/aon-co-jp/aruaru-llm) / [open-cuda](https://github.com/aon-co-jp/open-cuda) — 契約不要の独自AI SET構成
 - **aruaru.pro**(2026-09-13着手予定、新規リポジトリ未作成) — コンコナラ型
-  スキルマーケットプレイス+求人サイト統合。Rust + RPoem + RReact軸、
-  決済はStripe Connect。フロント基盤としてRReactのコンポーネントモデル
-  (第一段は完了、ツリー全体の再レンダーループが次の課題)を使う想定。
+  スキルマーケットプレイス+求人サイト統合。Rust + RPoem + RS-React軸、
+  決済はStripe Connect。フロント基盤としてRS-React(旧`RReact`)の
+  コンポーネントモデル(第一段は完了、ツリー全体の再レンダーループが
+  次の課題)を使う想定。
   既存の`job-site`(RPoem+aruaru-db、求人サイト試作品、リモート未push、
   `F:\runo\repository\job-site`)とは別件として現状のまま残す方針
   (ユーザー指示、2026-09-13)。
