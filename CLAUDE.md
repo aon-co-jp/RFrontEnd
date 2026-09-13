@@ -24,15 +24,24 @@ repo rename・crate改称、`RS-JavaScript`(JavaScript自体のトークナイ�
 
 | プロジェクト | 役割 | GitHub | ローカル | VPS |
 |---|---|---|---|---|
-| RHTML | HTML5相当のブラウザエンジン級パーサー/DOM実装 | [RTHML](https://github.com/aon-co-jp/RTHML) | `F:\runo\repository\RFrontEnd\RHTML` | `/root/RFrontEnd/RHTML` |
-| RCSS | CSS3相当のパーサー/カスケード/スタイル計算 | [RCSS](https://github.com/aon-co-jp/RCSS) | `F:\runo\repository\RFrontEnd\RCSS` | `/root/RFrontEnd/RCSS` |
+| RS-HTML | HTML5相当のブラウザエンジン級パーサー/DOM実装。旧`RTHML`(GitHub上のtypo、ローカルフォルダ名は`RHTML`) | [RS-HTML](https://github.com/aon-co-jp/RS-HTML) | `F:\runo\repository\RFrontEnd\RS-HTML` | `/root/RFrontEnd/RHTML`(旧パスのまま要更新) |
+| RS-CSS | CSS3相当のパーサー/カスケード/スタイル計算。旧`RCSS` | [RS-CSS](https://github.com/aon-co-jp/RS-CSS) | `F:\runo\repository\RFrontEnd\RS-CSS` | `/root/RFrontEnd/RCSS`(旧パスのまま要更新) |
 | RS-BootStrap | Bootstrap相当のCSSフレームワーク(グリッド+基本コンポーネント。旧`RBootstrap`) | [RS-BootStrap](https://github.com/aon-co-jp/RS-BootStrap) | `F:\runo\repository\RFrontEnd\RS-BootStrap` | `/root/RFrontEnd/RS-BootStrap`(旧パスのまま要更新) |
 | RS-TypeScript | TypeScript相当(型注釈削除トランスパイラ、クライアント側ロジック。旧`RTypeScript`) | [RS-TypeScript](https://github.com/aon-co-jp/RS-TypeScript) | `F:\runo\repository\RFrontEnd\RS-TypeScript` | `/root/RFrontEnd/RS-TypeScript`(旧パスのまま要更新) |
 | RS-JavaScript | JavaScript(ECMAScript仕様)自体のトークナイザ/パーサー/実行エンジン(2026-09-13新設、ひな形のみ) | [RS-JavaScript](https://github.com/aon-co-jp/RS-JavaScript) | `F:\runo\repository\RFrontEnd\RS-JavaScript` | 未配置 |
 | RJSON | JSON処理(旧`Rust-JSON`。**2026-09-13、`RFrontEnd`傘下の重複clone扱いをやめ`RS-JSON`へ統合**——実体は`F:\runo`直下のRS-JSON参照) | [RS-JSON](https://github.com/aon-co-jp/RS-JSON) | `F:\runo\repository\RS-JSON`(`RFrontEnd`傘下ではない) | `/root/RS-JSON` |
-| RS-React | React(React DOM/Native/Mobile相当)のコンポーネントモデル。2026-09-13、関数コンポーネント+`use_state`フック実装、続けて同日`RReact`から改称(crate名も`rs-react`へ) | [RS-React](https://github.com/aon-co-jp/RS-React) | `F:\runo\repository\RFrontEnd\RS-React` | `/root/RFrontEnd/RReact`(旧パスのまま要更新) |
-| RGraphQL | GraphQL仕様の自前実装(トークナイザ/パーサー、v0.2.0でmutation/変数/フラグメント対応) | [RGraphQL](https://github.com/aon-co-jp/RGraphQL) | `F:\runo\repository\RFrontEnd\RGraphQL` | `/root/RFrontEnd/RGraphQL` |
-| RNode.js | Node.jsコア概念の自前実装(CommonJS解決・イベントループ・実行時ドライバ) | [RNode.js](https://github.com/aon-co-jp/RNode.js) | `F:\runo\repository\RFrontEnd\RNode.js` | `/root/RFrontEnd/RNode.js` |
+| RS-React | React(React DOM/Native/Mobile相当)のコンポーネントモデル。2026-09-13、関数コンポーネント+`use_state`フック→ツリー全体の再レンダーループ(`App`)を実装、続けて同日`RReact`から改称(crate名も`rs-react`へ) | [RS-React](https://github.com/aon-co-jp/RS-React) | `F:\runo\repository\RFrontEnd\RS-React` | `/root/RFrontEnd/RReact`(旧パスのまま要更新) |
+| RS-GraphQL | GraphQL仕様の自前実装(トークナイザ/パーサー、v0.2.0でmutation/変数/フラグメント対応)。旧`RGraphQL` | [RS-GraphQL](https://github.com/aon-co-jp/RS-GraphQL) | `F:\runo\repository\RFrontEnd\RS-GraphQL` | `/root/RFrontEnd/RGraphQL`(旧パスのまま要更新) |
+| RS-Node.js | Node.jsコア概念の自前実装(CommonJS解決・イベントループ・実行時ドライバ)。旧`RNode.js` | [RS-Node.js](https://github.com/aon-co-jp/RS-Node.js) | `F:\runo\repository\RFrontEnd\RS-Node.js` | `/root/RFrontEnd/RNode.js`(旧パスのまま要更新) |
+
+**2026-09-13 補足**: 上記8リポジトリ中、crate名まで改称したのは
+`RS-TypeScript`(`rtypescript`→`rs-typescript`)・`RS-BootStrap`
+(`rbootstrap`→`rs-bootstrap`)・`RS-React`(`rreact`→`rs-react`)の3件のみ。
+`RS-HTML`(`rhtml5`)・`RS-CSS`(`rcss3`)・`RS-GraphQL`(`rgraphql`)・
+`RS-Node.js`(`rnodejs`)はGitHubリポジトリ名・ローカルフォルダ名・
+`repository=`フィールドのみ更新し、crate名自体は変更していない
+(依存関係の広さ・ソースコード内`use rhtml5::...`等の参照箇所が多く、
+名前変更の効果に対してリスクが大きいと判断したため)。
 
 **傘下ではないが関連するプロジェクト**(このリポジトリの外、`RFrontEnd`
 ディレクトリの外に配置):
